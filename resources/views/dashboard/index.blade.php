@@ -28,7 +28,38 @@
                             <p class="text-sm text-gray-400 italic mt-1">No tasks yet</p>
                         @endif
                     </div>
+                    <!-- Existing group display -->
+
+                    
+
                 @endforeach
+                <!-- Inline Task Creation Form -->
+                    <form action="{{ route('tasks.store') }}" method="POST" class="mt-3 space-y-2">
+                        @csrf
+                        <input type="hidden" name="project_group_id" value="{{ $group->id }}">
+
+                        <input type="text" name="title" placeholder="New task title" class="w-full border rounded p-2 text-sm" required>
+
+                        <div class="flex gap-2">
+                            <select name="status" class="border p-1 rounded text-sm">
+                                <option value="pending">Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+
+                            <select name="priority" class="border p-1 rounded text-sm">
+                                <option value="0">Normal</option>
+                                <option value="1">High</option>
+                                <option value="-1">Low</option>
+                            </select>
+
+                            <input type="date" name="due_date" class="border p-1 rounded text-sm" />
+                            
+                            <button type="submit" class="bg-green-600 text-white px-3 py-1 text-sm rounded">
+                                Add
+                            </button>
+                        </div>
+                    </form>
             </div>
         @endforeach
     </div>
